@@ -1,6 +1,7 @@
 /*
  *	Question: The prime factors of 13195 are 5, 7, 13 and 29.
  *	What is the largest prime factor of the number 600851475143?
+ *	Base_2: 1000 1011 1110 0101 1000 1001 1110 1010 1100 0111
  *	Author: James Muldoon
  */
 
@@ -8,56 +9,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define VAL 13195;
 
-// Global variable declarations
-int *pf;	// prime factor array
+int val = 13195;
 
 // Function prototype declarations
 int IsPrime(int);				// Determines if param is prime or not. returns 1 if prime, else 0
-int* PrimeFactorization(long long int); 	// Determines the prime factors for a give value param: v
-int GPF(int*);					// Calculates the greatest prime factor (GPF)
+int* PrimeFactorization(int, int *); 	// Determines the prime factors for a give value param: v
+int GPF(int *);					// Calculates the greatest prime factor (GPF)
 
 int main(int argc, char **argv){
-	long long int v;
-	 v = VAL;
-
-	pf = (int*)malloc(5); // Allocates 1/2 the sqrt of v to the array of prime factors.
-	pf = PrimeFactorization(v);		// Obtain the prime factors for the value in v.
-	printf("Greatest prime factor of %lld, is: %d", v, GPF(pf));	// Display solution
+	int v;	
+	v = val;
+	int a[4];
+	
+	PrimeFactorization(v, a);	// Obtain the prime factors for the value in v.
+	int i;
+	for (i = 0; i<sizeof(a)/sizeof(int); i++)
+		printf("%d\n",a[i]);
+	
+	printf("Greatest prime factor of %d, is: %d\n", v, GPF(a));	// Display solution
 
 	return 0;
 }
 
-int* PrimeFactorization(long long int v){
+int* PrimeFactorization(int v, int *array){
 	int ch, i;
-	int *pfArray;
 
-	for (ch = 2, i = 0; ch <= (int)sqrt(v); ch++){	// Checks all possibilities for 2 through sqrt(v)
-		if(IsPrime(ch)){			// is the count prime, if so execute the code
-			if(v%ch == 0){			// if the count goes in evenly to the current value
-				pfArray[i++] = ch;
-				v = v/ch;
-				if (IsPrime(v)){	// if this is prime, then v is fully factored
-					pfArray[i] = v;
-					return pfArray;
-				}
-				else				// if not prime, then continue to find the next prime factor
-					ch = 1;			// auto increments to 2 at the end of the loop
+	for (ch = 2, i = 0; ch <= (int)sqrt(v); ch++){	// Checks all possibilities for 2 through sqrt(v)		
+		if(IsPrime(ch) && (v%ch == 0)){	// is the count prime and % == 0, if so execute the code
+			array[i++] = ch;
+			v = v/ch;
+			if (IsPrime(v)){			// if this is prime, then v is fully factored
+				array[i] = v;
+				break;
 			}
+			else						// if not prime, then continue to find the next prime factor
+				ch = 1;					// auto increments to 2 at the end of the loop
 		}
 	}
 }
 
-int GPF(int *p){
+int GPF(int *array){
 	int i, max;
-
-	if((sizeof(p)/sizeof(int))<=1) // if the size of the array is !larger than 1 prime factor
-		return p[0];
-
-	max = p[0];
-	for (i = 0; i < sizeof(p)/sizeof(int); i++)	// Checks for all values in the array
-		max = fmax(max, p[i+1]);				// keeps only the max value
+	for (i = 0; i <= sizeof(array)/sizeof(int); i++)	// Checks for all values in the array
+		max = fmax(max, array[i+1]);					// keeps only the max value
 	return max;
 }
 
@@ -65,5 +60,5 @@ int IsPrime(int v){
 	int ch;
 	for (ch = 2; ch <= (int)sqrt(v); ch++)	// Checks all possibilities for 2 through sqrt(v)
 		if(v%ch == 0) return 0;				// Not prime
-	if(ch==v) return 1;						// Exhausted all options. Is prime
+	return 1;								// Exhausted all options. Is prime
 }
