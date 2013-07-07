@@ -1,7 +1,7 @@
 /*
  *  Info:       Singally Linked List for integer datatype storage.
  *  Created:    02.July.2013
- *  Modified:   03.July.2013
+ *  Modified:   06.July.2013
  *  Author:     James Muldoon
  */
 
