@@ -37,4 +37,4 @@ sll_test: $(OBJ)
 
 # Removes the object file, backup files, core dumps, and the executable by "make clean"
 clean:
-	$(RM) -f *.o *~ core $(TARGET) $(TARGET).exe
+	$(RM) *.o *~ core $(TARGET) $(TARGET).exe

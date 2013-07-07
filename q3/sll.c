@@ -10,11 +10,11 @@
 #endif
 
 typedef struct node{
-    int data;           // The integer data/key value for the node
+    long long int data; // The integer data/key value for the node
     struct node *next;  // Points to the next node
 } SLL;
 
-SLL *CreateNode(int num){
+SLL *CreateNode(long long int num){
     SLL *tmp;
     tmp=(SLL *)malloc(sizeof(SLL)); // Allocate the memory for the new node
     tmp->data=num;                  // Set the data of the new node to the num <int> parameter
@@ -22,13 +22,13 @@ SLL *CreateNode(int num){
     return tmp;
 }
 
-SLL *AppendTail(SLL *head, int num){
+SLL *AppendTail(SLL *head, long long int num){
     SLL *tmp, *curr;
     tmp=CreateNode(num);    // Creates the node to be inserted
 
-    if(head==NULL)  // If the list is empty
+    if(head==NULL)          // If the list is empty
         head=tmp;
-    else{           // All other conditions append after the last node in the list (tail)
+    else{                   // All other conditions append after the last node in the list (tail)
         for(curr=head;curr->next!=NULL;curr=curr->next);    // Traverse until end of list is reached
         curr->next=tmp;
         curr=tmp;
@@ -37,20 +37,20 @@ SLL *AppendTail(SLL *head, int num){
     return head;
 }
 
-SLL *AppendHead(SLL *head, int num){
+SLL *AppendHead(SLL *head, long long int num){
     SLL *tmp;
     tmp=CreateNode(num);    // Creates the node to be inserted
 
-    if(head==NULL)  // If the list is empty
+    if(head==NULL)          // If the list is empty
         head=tmp;
-    else{           // All other conditions append before the head
+    else{                   // All other conditions append before the head
         tmp->next=head;
         head=tmp;
     }
     return head;
 }
 
-SLL *InsertOrdered(SLL *head, int num){
+SLL *InsertOrdered(SLL *head, long long int num){
     SLL *tmp, *prev, *curr;
     tmp=CreateNode(num);    // Creates the node to be inserted
 
@@ -65,28 +65,27 @@ SLL *InsertOrdered(SLL *head, int num){
     return head;
 }
 
-SLL *Delete(SLL *head, int num){
+SLL *Delete(SLL *head, long long int num){
     SLL *tmp, *prev;
-    int i;
 
     if(head==NULL)
         printf("List is Empty\n");
     else{
         // Traverse the list until the node to be deleted is found
-        for(i=1, tmp=head, prev=NULL;tmp->next!=NULL && tmp->data!=num;prev=tmp,tmp=tmp->next, i++);
+        for(tmp=head, prev=NULL;tmp->next!=NULL && tmp->data!=num;prev=tmp,tmp=tmp->next);
         
         if(tmp==head){              // If the node is the root
             head=tmp->next;
             free(tmp);
-            printf("%d deleted successfully\n",num);
+            printf("%lld deleted successfully\n",num);
         }
         else if(tmp->data==num){   // If the node is not the root 
             prev->next=tmp->next;
             free(tmp);
-            printf("%d deleted successfully\n",num);
+            printf("%lld deleted successfully\n",num);
         }
         else                        // The node is not in the list
-            printf("%d not found in the list\n",num);
+            printf("%lld not found in the list\n",num);
     }
     return head;
 }

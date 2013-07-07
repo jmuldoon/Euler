@@ -17,7 +17,7 @@ typedef struct node SLL;
  *      <int>num: value that is to be stored as the data in the node to be appended.
  * Return type is SLL *.
  */
-SLL *CreateNode(int num);
+SLL *CreateNode(long long int num);
 
 /* Append a new node to the end/tail of the linked list.
  * Parameter description as defined below:
@@ -25,7 +25,7 @@ SLL *CreateNode(int num);
  *      <int>num: value that is to be stored as the data in the node to be appended.
  * Return type is SLL * and is the head of the list.
  */
-SLL *AppendTail(SLL *head, int num);
+SLL *AppendTail(SLL *head, long long int num);
 
 /* Append a new node to the root/head of the linked list.
  * Parameter description as defined below:
@@ -33,7 +33,7 @@ SLL *AppendTail(SLL *head, int num);
  *      <int>num:	value that is to be stored as the data in the node to be appended.
  * Return type is SLL * and is the head of the list.
  */
-SLL *AppendHead(SLL *head, int num);
+SLL *AppendHead(SLL *head, long long int num);
 
 /* Append a new node, in order, based on the value of the parameter num that is passed; into the linked list.
  * Parameter description as defined below:
@@ -41,7 +41,7 @@ SLL *AppendHead(SLL *head, int num);
  *      <int>num: value that is to be stored as the data in the node to be appended.
  * Return type is SLL * and is the head of the list.
  */
-SLL *InsertOrdered(SLL *head, int num);
+SLL *InsertOrdered(SLL *head, long long int num);
 
 /* Delete a node from the linked list that has the parameter num. Will delete the first occurance of this value.
  * Parameter description as defined below:
@@ -49,7 +49,7 @@ SLL *InsertOrdered(SLL *head, int num);
  *      <int>num: value that is stored as the data in the node to be deleted.
  * Return type is SLL * and is the head of the list.
  */
-SLL *Delete(SLL *head, int num);
+SLL *Delete(SLL *head, long long int num);
 
 /* Traverses every node in the linked list starting from the SLL * parameter and compares it with the previous node,
  * thuse finding the maximal data value stored in the entire linked list.

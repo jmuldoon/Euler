@@ -9,29 +9,29 @@
 #include "sll.h"
 #include <math.h>
 
-int val = 13195;
+long long int val = 600851475143;
 
 // Function prototype declarations
-int IsPrime(int);						// Determines if param is prime or not. returns 1 if prime, else 0
-SLL *PrimeFactorization(SLL *, int); 	// Determines the prime factors for a give value param: v
+int IsPrime(long long int);								// Determines if param is prime or not. returns 1 if prime, else 0
+SLL *PrimeFactorization(SLL *, long long int); 			// Determines the prime factors for a give value param: v
 
 int main(int argc, char **argv){
 	SLL *list=NULL;
 
 	list = PrimeFactorization(list, val);									// Obtain the prime factors for the value in v.	
-	printf("Greatest prime factor of %d, is: %d\n", val, MaxValue(list));	// Display solution
+	printf("Greatest prime factor of %lld, is: %d\n", val, MaxValue(list));	// Display solution
 
 	return 0;
 }
 
-SLL *PrimeFactorization(SLL *head, int v){
+SLL *PrimeFactorization(SLL *head, long long int v){
 	SLL *tmp;
-	int ch;
+	long long int ch;
 	
-	for (tmp = head, ch = 2; ch <= (int)sqrt(v); ch++){	// Checks all possibilities for 2 through sqrt(v)		
+	for (tmp = head, ch = 2; ch <= (long long int)sqrt(v); ch++){	// Checks all possibilities for 2 through sqrt(v)		
 		if(IsPrime(ch) && (v%ch == 0)){					// is the count prime and % == 0, if so execute the code
 			tmp = InsertOrdered(tmp, ch);				// appends to the end of the linked list
-			v = v/ch;
+			v = v/ch;			
 			if (IsPrime(v)){							// if this is prime, then v is fully factored
 				tmp = InsertOrdered(tmp, v);			// appends to the end of the linked list
 				break;
@@ -43,9 +43,9 @@ SLL *PrimeFactorization(SLL *head, int v){
 	return tmp;
 }
 
-int IsPrime(int v){
-	int ch;
-	for (ch = 2; ch <= (int)sqrt(v); ch++)			// Checks all possibilities for 2 through sqrt(v)
+int IsPrime(long long int v){
+	long long int ch;
+	for (ch = 2; ch <= (long long int)sqrt(v); ch++)			// Checks all possibilities for 2 through sqrt(v)
 		if(v%ch == 0) return 0;						// Not prime
 	return 1;										// Exhausted all options. Is prime
 }
